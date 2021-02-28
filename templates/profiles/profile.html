@@ -11,6 +11,77 @@
 
 {% block content %}
 
+<!-- Image Modals  -->
+<div class="ui tiny modal" data-modal="longer image">
+    <i class="close icon"></i>
+    <div class="header">
+        Update Profile Image
+    </div>
+    <div class="scrolling content">
+        
+        <!-- Displaying Image and Alert Box  -->
+        
+        <div id="img-box"></div>
+
+        <div id="alert-box"></div>
+
+        <form action="#" class="ui form" id="p-form">
+            {% csrf_token %}
+            {{ form_avatar.as_p }}
+            
+            <div class="not-visible mt-2 mb-3" id="btn-box">
+                <button type="submit" class="ui button grey mini mt-2" data-filter="NO_FILTER">No Filter</button>
+                <button type="submit" class="ui button inverted red mini mt-2" data-filter="COLORIZED">COLORIZED</button>
+                <button type="submit" class="ui button inverted secondary mini mt-2" data-filter="GRAYSCALE">GRAYSCALE</button>
+                <button type="submit" class="ui button inverted primary mini mt-2" data-filter="BLURRED">BLURRED</button>
+                <button type="submit" class="ui button inverted pink mini mt-2" data-filter="BINARY">BINARY</button>
+                <button type="submit" class="ui button violet mini mt-2" data-filter="INVERT">INVERT</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+    <!-- Share Thoughts Modal  -->
+    <div class="ui longer modal " data-modal="longer posts">
+        <i class="close icon"></i>
+        <div class="header">
+            Share your Content
+        </div>
+        <div class="scrolling content">
+            <div class="ui container">
+                <div class="ui styled accordion">
+                    <div class="active title">
+                        <i class="terminal icon"></i>
+                        Share Your Thoughts
+                    </div>
+                    <div class="active content">
+                        <form class="ui form">
+                            <div class="field">
+                                <label>Text</label>
+                                <textarea></textarea>
+                            </div>
+
+                            <button class="ui button small inverted green" type="submit">Share Your Thought</button>
+                        </form>
+                    </div>
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        Upload Video
+                    </div>
+                    <div class="content">
+                        <form action="#">
+                            <div class="ui input">
+                                <input type="file" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <div class="profile">
 
     <div class="cover_image">
@@ -48,7 +119,7 @@
                 </div>
 
                 
-                <a href="#"><button class="ui button orange" style="width: 100% !important;">Update Profile</button></a>
+                <button class="ui button orange" style="width: 100% !important;" data-modal-target="longer image">Update Profile</button>
                 
 
                 {% if profile.user == request.user %}
@@ -489,3 +560,9 @@
 </div>
 
 {% endblock content %}
+
+{% block script_tag %}
+
+    <script src="{% static 'profiles/update_avatar.js' %}"></script>
+
+{% endblock script_tag %}

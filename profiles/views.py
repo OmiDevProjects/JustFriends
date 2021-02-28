@@ -2,11 +2,16 @@ from django.shortcuts import render
 from .models import Profile
 from django.views.generic import TemplateView, View
 from django.http import JsonResponse
+from .forms import UpdateProfileImage
 
 def profile_view(request):
     profile = Profile.objects.get(user=request.user)
-    context = {}
-    context['profile'] = profile
+    update_avatar_form = UpdateProfileImage(request.FILES or None)
+
+    context = {
+        'form_avatar': update_avatar_form,
+        'profile': profile,
+    }
     return render(request, 'profiles/profile.html', context)
 
 def get_profile(request, *args, **kwargs):
@@ -15,22 +20,24 @@ def get_profile(request, *args, **kwargs):
     context['profile'] = profile
     return render(request, 'profiles/profile.html', context)
 
-class MyProfileView(TemplateView):
-    template_name = 'profiles/my_profile.html'
+def update_profile_image(request):
+    
+    data = {}
 
-class MyProfileData(View):
-    def get(self, *args, **kwargs):
-        profile = Profile.objects.get(user=self.request.user)
-        qs = profile.proposals_for_following()
+    if request.is_ajax():
+        pic_id = json.loads(request.POST.get('id'))
+        action = request.POST.get('action')
 
-        profiles_to_follow_list = []
-        for user in qs:
-            p = Profile.objects.get(user__username=user.username)
-            profile_item = {
-                'id': p.id,
-                'user': p.user.username,
-                'avatar': p.avatar.url,
-            }
-            profiles_to_follow_list.append(profile_item)
+        if pic_id is None:
+            if Post_form.is_valid():
+                obj = Post_form.save(commit=False)
+        else:
+            obj = Post.objects.get(id=pic_id)
 
-        return JsonResponse({'data': profiles_to_follow_list})
+        obj.action = action
+        obj.save()
+
+        data = serializers.serialize('json', [obj,])
+        return JsonResponse({'data': data})
+
+    return JsonResponse()
