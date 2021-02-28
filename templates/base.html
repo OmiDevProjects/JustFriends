@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts  -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rancho&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baumans&display=swap" rel="stylesheet">
+
+    <!-- CSS Files  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" type="text/css" />
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+
+    {% block style_tag %} {% endblock style_tag %}
+
+    <!-- Title  -->
+    <title>JustFriends - {% block title %} {% endblock title %}</title>
+
+</head>
+
+<body>
+
+    <!-- Navbar  -->
+    <div class="ui tablet computer only padded grid">
+        <div class="ui top fixed borderless fluid huge menu">
+            <div class="ui container">
+                <a class="header item header_title" href="{% url 'posts:homepage' %}">JustFriends</a>
+                <a class="active item" href="{% url 'posts:homepage' %}">Home</a> 
+                <a class="item">Search Friends</a>
+                <a class="item">My Posts</a>
+                <!-- <a class="item"> -->
+                    <div class="ui item floating dropdown icon button medium"> {{ request.user }}  &nbsp; &nbsp; <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="{% url 'profiles:profile_view' %}" class="item">
+                                Profile
+                            </a>
+                            <a href="" class="item">
+                                Your Friends
+                            </a>
+                            <a href="" class="item">
+                                Make Friends
+                            </a>
+                            <div class="ui divider"></div>
+                            <a href="" class="item">
+                                All Notification
+                            </a>
+                            <a href="" class=" item">
+                                Received Invites &nbsp; <div class="ui purple horizontal label">{{ invites_num }}</div>
+                            </a>
+                        </div>
+                    </div>
+                <!-- </a> -->
+                <div class="right menu">
+                    <a class="item">Login</a>
+                    <a class="item">Sign up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui mobile only padded grid">
+        <div class="ui top fixed borderless huge fluid menu">
+            <a class="header item header_title" href="{% url 'posts:homepage' %}">JustFriends</a>
+            <div class="right menu">
+                <div class="item">
+                    <button class="ui icon toggle basic button">
+                        <i class="content icon"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="ui vertical borderless fluid menu">
+                <a class="active item" href="{% url 'posts:homepage' %}">Home</a> 
+                <a class="item">About</a>
+                <a class="item">Contact</a>
+                <div class="ui item floating dropdown button medium"> {{ request.user }} &nbsp; &nbsp; <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="{% url 'profiles:profile_view' %}" class="item">
+                            Profile
+                        </a>
+                        <a href="" class="item">
+                            Your Friends
+                        </a>
+                        <a href="" class="item">
+                            Make Friends
+                        </a>
+                        <div class="ui divider"></div>
+                        <a href="" class="item">
+                            All Notification
+                        </a>
+                        <a href="" class=" item">
+                            Received Invites &nbsp; <div class="ui purple horizontal label">{{ invites_num }}</div>
+                        </a>
+                    </div>
+                </div>
+                <a class="item">Login</a>
+                <a class="item">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="ui container">
+        {% block content %} {% endblock content %}
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="{% static 'main.js' %}"></script>
+    <script src="{% static 'confetti.min.js' %}"></script>
+    <!-- For Emoji  -->
+    <script src="{% static 'inputEmoji.js' %}"></script>
+    {% block script_tag %} {% endblock script_tag %}
+
+</body>
+
+</html>

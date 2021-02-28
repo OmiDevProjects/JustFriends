@@ -1,0 +1,337 @@
+
+  /* main Grid  */
+  .grid-margin-top{
+    margin-top: 5px !important;
+}
+
+.notifications_tab {
+  width: 100% !important;
+}
+
+.logo-text{
+  text-align: center;
+  color: rgb(160, 0, 88) !important;
+}
+
+/* grid end  */
+
+/* Profile  */
+.profile_1{
+  width: 100% !important;
+  border-radius: 15px !important;
+  background: #dde1e7 !important;
+  box-shadow:  3px 3px 6px #bec2c7,
+               -3px -3px 6px #fcffff !important;
+}
+
+/* profile  */
+
+/* Messages  */
+.message {
+    font-size: 10px !important;
+}
+
+/* message end */
+
+
+/* Add_posts Block  */
+.add-posts {
+  background: #dde1e7 !important;
+  box-shadow:  3px 3px 6px #bec2c7,
+               -3px -3px 6px #fcffff !important;
+  /* border: none !important; */
+  border-radius: 10px !important;
+  /* border: 2px solid purple !important; */
+  border: none !important;
+}
+
+.sub-title {
+  font-size: 1.3rem;
+  font-family: 'Baumans', cursive;
+  font-family: 'Baumans', cursive;
+  color:rgb(105, 2, 189);
+}
+
+/* Add-Posts end  */
+
+/* Image Post Block  */
+/* .segment-image{
+    padding: 0 !important;
+} */
+.post-image {
+  padding: 0 !important;
+  width: 100%;
+  border: none !important;
+  background: #dde1e7 !important;
+  box-shadow:  3px 3px 6px #bec2c7,
+           -3px -3px 6px #fcffff !important;
+}
+
+.segment{
+  border: none !important;
+  background: #dde1e7 !important;
+}
+
+.post-image-content {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+/* .ribbon{
+  margin: 0 !important;
+  padding: -10px !important;
+} */
+
+.post-image-para{
+  margin-top: 10px !important;
+  margin-bottom: 4px;
+  color:rgb(119, 119, 119) !important;
+}
+
+.margin-bottom {
+  margin-bottom:10px !important;
+}
+
+.margin-top{
+  margin-top: 20px !important;
+}
+
+.margin-top-post {
+  margin-top: 10px !important;
+}
+
+.time_created{
+  color: crimson !important;
+  text-decoration: none !important;
+}
+
+/* Suggestion Box  */
+
+.suggesstions {
+  border-radius: 10px !important;
+  border: none !important;
+  background: #dde1e7 !important;
+  box-shadow:  3px 3px 6px #bec2c7,
+               -3px -3px 6px #fcffff !important;
+  font-size: 12px !important;
+}
+
+.heading {
+  text-align: center;
+  color: gray;
+}
+
+#suggestion-name {
+  color:rgb(119, 119, 119) !important;
+}
+
+/* Thought Card  */
+
+.card {
+  width: 100% !important;
+}
+
+.thoughts {
+  background: #dde1e7 !important;
+  box-shadow:  3px 3px 6px #bec2c7,
+               -3px -3px 6px #fcffff !important;
+}
+
+.description_thought{
+  color: gray !important;
+}
+
+
+/* Friend Online List  */
+.friends_online_list {
+  margin-top: 20px !important;
+  border-radius: 10px !important;
+  padding: 10px !important;
+  background: #dde1e7 !important;
+  box-shadow:  3px 3px 6px #bec2c7,
+               -3px -3px 6px #fcffff !important;
+}
+
+
+.friends_online_list h4{
+  text-align: center;
+  color: gray;
+}
+
+.friends_online_list name {
+  color: gray;
+}
+
+.friends_online_list .content{
+  font-size: 12px !important;
+}
+
+.friends_online_list .content a{
+  color:rgb(119, 119, 119) !important;
+}
+
+[data-tooltip]:after{
+  /* border: none !important; */
+  border: 1px solid rgb(187, 187, 187) !important;
+  background: #ffffff !important;
+  box-shadow:  5px 5px 9px #c5c8ce,
+               -5px -5px 9px #ffffff73 !important;
+  color:rgb(119, 119, 119) !important;
+
+
+}
+
+.mt-2 {
+  margin-top: 10px !important;
+}
+
+[data-position="right center"]:after {
+  background: #ffffff !important;
+}
+
+.post-only-image {
+  border: none !important;
+  background: #dde1e7 !important;
+  box-shadow:  3px 3px 5px #c5c8ce,
+               4px 4px 9px #ffffff73 !important;
+}
+
+
+/* Activity Feed Box  */
+.activity-box {
+  border-radius: 10px !important;
+  margin-top: 20px !important;
+  padding: 10px !important;
+  background: #dde1e7 !important;
+  box-shadow:  3px 3px 6px #bec2c7,
+               -3px -3px 6px #fcffff !important;
+}
+
+.activity-box h3{
+  text-align: center;
+  font-family: 'Baumans', cursive;
+  color: gray !important;
+
+}
+.activity-feed {
+  font-size: 8px !important;
+  color: gray !important;
+}
+
+.activity-header {
+  color: gray !important;
+  text-decoration: none !important;
+}
+
+/* Comments Section styling  */
+
+.comment {
+  background-image: linear-gradient( to right, #bababa, #dbdbdb) !important;
+  padding: 10px !important;
+}
+
+.comments > .header {
+  font-size: 13px !important;
+  text-align: center;
+  color: gray;
+} 
+#comment-header{
+  color: rgb(6, 63, 90) !important;
+}
+
+textarea {
+  margin-bottom: 10px !important;
+}
+
+
+ /* Media Queries  */
+
+@media(max-width: 1280px) and (max-height: 800px) {
+  .activity-box {
+    display: none;
+  }
+  .sub-title {
+    font-size: 15px !important;
+  }
+}
+
+@media(max-width: 1280px) and (max-height: 950px) {
+  .activity-box {
+    display: none;
+  }
+  .sub-title {
+    font-size: 15px !important;
+  }
+}
+
+
+/* For Ipad Mini and Tablet  */
+@media(max-width: 768px) and (max-height: 1024px) {
+  .activity-box {
+    display: none;
+  }
+  .sub-title {
+    font-size: 15px !important;
+  }
+
+  .profile_1 {
+    font-size: 10px !important;
+  }
+
+  .ribbon{
+    font-size: 9px !important;
+  }
+
+  .description > p{
+    font-size: 9px !important;
+  }
+  .message {
+    font-size: 8px !important;
+  }
+
+  .friends_online_list .content{
+    font-size: 8px !important;
+  }
+
+  .friends_online_list h4 {
+    text-align: center;
+    color: gray;
+    font-size: 10px !important;
+  }
+
+  .avatar {
+    width: 20px !important;
+  }
+
+  .suggesstions {
+    font-size: 8px !important;
+  }
+  .heading h5 {
+    text-align: center;
+    color: gray;
+    font-size: 10px !important;
+  }
+}
+
+/* For iPad Pro  */
+@media(max-width: 1024px) and (max-height: 1366px) {
+  .activity-box {
+    display: none;
+  }
+  .sub-title {
+    font-size: 15px !important;
+  }
+
+  .profile_1 {
+    font-size: 12px !important;
+  }
+
+  .ribbon{
+    font-size: 9px !important;
+  }
+}
+
+@media(max-width: 375px) {
+  .profile_1 {
+    display: none;
+  }
+}

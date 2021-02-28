@@ -1,0 +1,584 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Homepage {% endblock title %}
+
+{% block style_tag %}
+    <link rel="stylesheet" href="{% static 'posts/css/styles.css' %}">
+{% endblock style_tag %}
+
+{% block content %}
+
+    <!-- All Modals Of Homepage  -->
+
+    <!-- Image Modals  -->
+    <div class="ui tiny modal" data-modal="longer image">
+        <i class="close icon"></i>
+        <div class="header">
+            Upload Image
+        </div>
+        <div class="scrolling content">
+            
+            <!-- Displaying Image and Alert Box  -->
+            
+            <div id="img-box"></div>
+
+            <div id="alert-box"></div>
+
+            <form action="#" class="ui form" id="p-form">
+                {% csrf_token %}
+                {{ post_form.as_p }}
+                
+                <div class="not-visible mt-2 mb-3" id="btn-box">
+                    <button type="submit" class="ui button grey mini mt-2" data-filter="NO_FILTER">No Filter</button>
+                    <button type="submit" class="ui button inverted red mini mt-2" data-filter="COLORIZED">COLORIZED</button>
+                    <button type="submit" class="ui button inverted secondary mini mt-2" data-filter="GRAYSCALE">GRAYSCALE</button>
+                    <button type="submit" class="ui button inverted primary mini mt-2" data-filter="BLURRED">BLURRED</button>
+                    <button type="submit" class="ui button inverted pink mini mt-2" data-filter="BINARY">BINARY</button>
+                    <button type="submit" class="ui button violet mini mt-2" data-filter="INVERT">INVERT</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Share Thoughts Modal  -->
+    <div class="ui longer modal " data-modal="longer posts">
+        <i class="close icon"></i>
+        <div class="header">
+            Share your Content
+        </div>
+        <div class="scrolling content">
+            <div class="ui container">
+                <div class="ui styled accordion">
+                    <div class="active title">
+                        <i class="terminal icon"></i>
+                        Share Your Thoughts
+                    </div>
+                    <div class="active content">
+                        <form class="ui form">
+                            <div class="field">
+                                <label>Text</label>
+                                <textarea></textarea>
+                            </div>
+
+                            <button class="ui button small inverted green" type="submit">Share Your Thought</button>
+                        </form>
+                    </div>
+                    <div class="title">
+                        <i class="dropdown icon"></i>
+                        Upload Video
+                    </div>
+                    <div class="content">
+                        <form action="#">
+                            <div class="ui input">
+                                <input type="file" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- End of Modals Homepage  -->
+
+
+    <div class="container">
+        <div class="ui grid grid-margin-top">
+            <div class="stackable row">
+
+                <!-- Profile  -->
+                <div class="four wide column left ">
+                    <div class="ui card profile_1">
+                        <div class="image">
+                            <img src="{{ profile.avatar.url }}" height="300px" width="100%">
+                        </div>
+                        <div class="content">
+                            <div class="header header_1 align_center">{{ profile.user.username|capfirst }}</div>
+                            <div class="meta">
+                                <a>Profession : {{ profile.profession }}</a>
+                            </div>
+                            <div class="description">
+                                <p>“{{ profile.bio }}”</p>
+                            </div>
+                            <a class="ui blue right ribbon label" href="{% url 'profiles:profile_view' %}">Profile</a>
+                        </div>
+                        <div class="extra content">
+                            <span class="right floated">
+                                {{ profile.user.date_joined|date }}
+                            </span>
+                            <span>
+                                <i class="user icon"></i>
+                                {{ profile.get_friends }} Friends
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <!-- Activity Feed  -->
+                    <div class="ui relaxed list activity-box">
+                        <h3>Activity Feeds</h3>
+                        <div class="item">
+                            <img class="ui avatar image" src="./images/wallpaperflare.com_wallpaper.jpg">
+                            <div class="content activity-feed">
+                                <a class="header activity-header">Daniel Louise</a>
+                                <div class="description">
+                                    Last seen watching <a><b>Arrested Development</b></a> just now.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img class="ui avatar image" src="./images/wp1808936-captain-america-wallpapers.jpg">
+                            <div class="content activity-feed">
+                                <a class="header">Stevie Feliciano</a>
+                                <div class="description">Last seen watching <a><b>Bob's Burgers</b></a> 10 hours ago.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img class="ui avatar image" src="./images/05RWzhnlpCtXW0mmu7NobIY-1..1583359767.jpg">
+                            <div class="content activity-feed">
+                                <a class="header">Elliot Fu</a>
+                                <div class="description">Last seen watching <a><b>The Godfather Part 2</b></a>
+                                    yesterday.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Middle Column -> Posts, Content, Classification etc  -->
+                <div class="nine wide column">
+
+                    <div class="ui segment add-posts">
+                        <h2 class="header_title logo-text">JustFriends</h2>
+                        <div class="ui grid">
+                            <div class="row stackable">
+                                <div class="eight wide column">
+                                    <p class="sub-title"> Want to share something ? ❤️ <br> Just upload it!</p>
+                                </div>
+                                <div class="eight wide column">
+                                    <div class="ui tiny buttons" style="width:100%;">
+                                        <button class="ui animated fade violet button" data-modal-target="longer posts">
+                                            <span class="visible content">Post</span>
+                                            <span class="hidden content"><i class="rss large icon"></i></span>
+                                        </button>
+                                        <div class="or"></div>
+                                        <button class="ui animated drop blue button" data-modal-target="longer image">
+                                            <span class="visible content">Image</span>
+                                            <span class="hidden content"><i class="image large icon"></i></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image Post  -->
+
+                    {% for post in posts %}
+                        {% if post.post_document != 'post.png' %}
+                            <div class="ui segment segment-image post-image autumn leaf margin-top">
+
+                                <a class="ui yellow left corner label" onclick="startheart();">
+                                    <i class="heart icon"></i>
+                                </a>
+
+                                {% if post.find_typecheck == 2 %}
+                                    <video src="{{ post.post_document.url }}" controls width="100%"></video>
+                                {% else %}
+                                    <img class="ui image" src="{{ post.post_document.url }}" width="100%">
+                                {% endif %}
+
+                                <div class="margin-top-post ui segment post-image-content">
+                                    <a class="ui pink left shake ribbon label" data-modal-target="longer omi"><i
+                                            class="heart icon"></i> 101 Likes</a>
+                                    <p class="post-image-para">
+                                        {{ post.description }}
+                                    </p>
+                                    <a class="ui green right ribbon label" data-modal-target="longer comment omi"><i
+                                            class="comments icon"></i> 109 Comments</a>
+                                </div>
+                                
+                                {% if post.find_typecheck == 2 %}
+                                    <div class="ui mini top right attached label">Video Classified : Stranger Things</div>
+                                {% else %}
+                                    <div class="ui mini top right attached label">Image Classified : Stranger Things</div>
+                                {% endif %}
+
+                                <div class="ui mini bottom left attached label">
+                                    <a class="ui mini basic image label">
+                                        <img src="{{ post.author.avatar.url }}">
+                                        {{ post.author }} : <b class="time_created">{{ post.created|timesince }} ago</b>
+                                    </a>
+                                </div>
+
+                                <!-- Likes Modal -->
+                                <div class="ui longer modal" data-modal="longer omi">
+                                    <div class="header">Likes</div>
+                                    <div class="scrolling content">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel quas, repellendus at
+                                            adipisci nam enim
+                                            laudantium. Animi quo tempora amet.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Comments Modal  -->
+                                <div class="ui longer modal comment-box" data-modal="longer comment omi">
+                                    <div class="header" id="comment-header">Comments</div>
+                                    <div class="scrolling content">
+                                        <div class="ui threaded comments">
+                                            <h3 class="ui dividing header">Onkar Nardekar's Posts Comment Section</h3>
+                                            <div class="comment">
+                                                <a class="avatar">
+                                                    <img src="./images/FB_IMG_1565009965060.jpg">
+                                                </a>
+                                                <div class="content">
+                                                    <a class="author">Onkar Nardekar</a>
+                                                    <div class="metadata">
+                                                        <span class="date">Today at 5:42PM</span>
+                                                    </div>
+                                                    <div class="text">
+                                                        How artistic!
+                                                    </div>
+                                                    <div class="actions">
+                                                        <a class="reply">Reply</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="comment">
+                                                <a class="avatar">
+                                                    <img src="./images/wallpaperflare.com_wallpaper.jpg">
+                                                </a>
+                                                <div class="content">
+                                                    <a class="author">Aakash Panda</a>
+                                                    <div class="metadata">
+                                                        <span class="date">Yesterday at 12:30AM</span>
+                                                    </div>
+                                                    <div class="text">
+                                                        <p>This has been very useful for my research. Thanks as well!</p>
+                                                    </div>
+                                                    <div class="actions">
+                                                        <a class="reply">Reply</a>
+                                                    </div>
+                                                </div>
+                                                <div class="comments">
+                                                    <div class="comment">
+                                                        <a class="avatar">
+                                                            <img src="./images/wp1808936-captain-america-wallpapers.jpg">
+                                                        </a>
+                                                        <div class="content">
+                                                            <a class="author">Pranav Padwal</a>
+                                                            <div class="metadata">
+                                                                <span class="date">Just now</span>
+                                                            </div>
+                                                            <div class="text">
+                                                                Elliot you are always so right :)
+                                                            </div>
+                                                            <div class="actions">
+                                                                <a class="reply">Reply</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="comment">
+                                                <a class="avatar">
+                                                    <img src="./images/wp1808931-captain-america-hd-wallpapers (1).jpg">
+                                                </a>
+                                                <div class="content">
+                                                    <a class="author">Milli Bobby Brown</a>
+                                                    <div class="metadata">
+                                                        <span class="date">5 days ago</span>
+                                                    </div>
+                                                    <div class="text">
+                                                        Dude, this is awesome. Thanks so much
+                                                    </div>
+                                                    <div class="actions">
+                                                        <a class="reply">Reply</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="comment">
+                                                <a class="avatar">
+                                                    <img src="./images/wp1808931-captain-america-hd-wallpapers (1).jpg">
+                                                </a>
+                                                <div class="content">
+                                                    <a class="author">Milli Bobby Brown</a>
+                                                    <div class="metadata">
+                                                        <span class="date">5 days ago</span>
+                                                    </div>
+                                                    <div class="text">
+                                                        Dude, this is awesome. Thanks so much
+                                                    </div>
+                                                    <div class="actions">
+                                                        <a class="reply">Reply</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="comment">
+                                                <a class="avatar">
+                                                    <img src="./images/wp1808931-captain-america-hd-wallpapers (1).jpg">
+                                                </a>
+                                                <div class="content">
+                                                    <a class="author">Milli Bobby Brown</a>
+                                                    <div class="metadata">
+                                                        <span class="date">5 days ago</span>
+                                                    </div>
+                                                    <div class="text">
+                                                        Dude, this is awesome. Thanks so much
+                                                    </div>
+                                                    <div class="actions">
+                                                        <a class="reply">Reply</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="comment">
+                                                <a class="avatar">
+                                                    <img src="./images/wp1808931-captain-america-hd-wallpapers (1).jpg">
+                                                </a>
+                                                <div class="content">
+                                                    <a class="author">Milli Bobby Brown</a>
+                                                    <div class="metadata">
+                                                        <span class="date">5 days ago</span>
+                                                    </div>
+                                                    <div class="text">
+                                                        Dude, this is awesome. Thanks so much
+                                                    </div>
+                                                    <div class="actions">
+                                                        <a class="reply">Reply</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <form class="ui reply form">
+                                                <div class="field">
+                                                    <textarea rows="3" class="textbox-emoji" name="emoji"></textarea>
+                                                </div>
+                                                <div class="tiny ui orange labeled submit icon button">
+                                                    <i class="icon edit"></i> Add Reply
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if post.post_document == 'post.png' %}
+                            <!-- Thoughts or Quotes or Status Posts with no Image  -->
+                            <div class="ui card thoughts autumn leaf margin-top">
+                                <div class="content">
+                                    <a data-modal-target="longer posts omi 1">
+                                        <i class="right floated like icon"></i>
+                                    </a>
+                                    <a data-modal-target="longer comments omi 1">
+                                        <i class="right floated comments icon"></i>
+                                    </a>
+                                    <div class="header">
+                                        <a class="ui mini basic image label">
+                                            <img src="{{ post.author.avatar.url }}">
+                                            {{ post.author }}
+                                        </a>
+                                    </div>
+                                    <div class="description description_thought">
+                                        <p>
+                                            {{ post.description }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="extra content">
+                                    <span class="left floated like">
+                                        <i class="heart icon"></i>
+                                        305 Likes
+                                    </span>
+                                    <span class="right floated">
+                                        <i class="clock outline icon"></i>
+                                        {{ post.created|timesince }} ago
+                                    </span>
+                                </div>
+
+
+                                <!-- Likes Modal -->
+                                <div class="ui longer modal" data-modal="longer posts omi 1">
+                                    <div class="header">Posts Likes</div>
+                                    <div class="scrolling content">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel quas, repellendus at
+                                            adipisci nam enim
+                                            laudantium. Animi quo tempora amet.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Comments Modal  -->
+                                <div class="ui longer modal" data-modal="longer comments omi 1">
+                                    <div class="header">Posts Comments</div>
+                                    <div class="scrolling content">
+
+                                        <!-- Comment Boxes  -->
+                                        <div class="ui threaded comments">
+                                            <h3 class="ui dividing header">Comments</h3>
+                                            <div class="comment">
+                                                <a class="avatar">
+                                                    <img src="./images/wp1808931-captain-america-hd-wallpapers (1).jpg">
+                                                </a>
+                                                <div class="content">
+                                                    <a class="author">Matt</a>
+                                                    <div class="metadata">
+                                                        <span class="date">Today at 5:42PM</span>
+                                                    </div>
+                                                    <div class="text">
+                                                        How artistic!
+                                                    </div>
+                                                    <div class="actions">
+                                                        <a class="reply">Reply</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="comment">
+                                                <a class="avatar">
+                                                    <img src="./images/wp1808936-captain-america-wallpapers.jpg">
+                                                </a>
+                                                <div class="content">
+                                                    <a class="author">Elliot Fu</a>
+                                                    <div class="metadata">
+                                                        <span class="date">Yesterday at 12:30AM</span>
+                                                    </div>
+                                                    <div class="text">
+                                                        <p>This has been very useful for my research. Thanks as well!</p>
+                                                    </div>
+                                                    <div class="actions">
+                                                        <a class="reply">Reply</a>
+                                                    </div>
+                                                </div>
+                                                <div class="comments">
+                                                    <div class="comment">
+                                                        <a class="avatar">
+                                                            <img src="./images/wallpaperflare.com_wallpaper.jpg">
+                                                        </a>
+                                                        <div class="content">
+                                                            <a class="author">Jenny Hess</a>
+                                                            <div class="metadata">
+                                                                <span class="date">Just now</span>
+                                                            </div>
+                                                            <div class="text">
+                                                                Elliot you are always so right :)
+                                                            </div>
+                                                            <div class="actions">
+                                                                <a class="reply">Reply</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="comment">
+                                                <a class="avatar">
+                                                    <img src="./images/FB_IMG_1565009965060.jpg">
+                                                </a>
+                                                <div class="content">
+                                                    <a class="author">Joe Henderson</a>
+                                                    <div class="metadata">
+                                                        <span class="date">5 days ago</span>
+                                                    </div>
+                                                    <div class="text">
+                                                        Dude, this is awesome. Thanks so much
+                                                    </div>
+                                                    <div class="actions">
+                                                        <a class="reply">Reply</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <form class="ui reply form">
+                                                <div class="field">
+                                                    <textarea></textarea>
+                                                </div>
+                                                <div class="tiny ui orange labeled submit icon button">
+                                                    <i class="icon edit"></i> Add Reply
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    <div id="post2">
+
+                    </div>
+                </div>
+
+                <!-- Notifications with filters  -->
+                <div class="three wide column right notifications_tab">
+
+                    <div class="notifications">
+
+                        <!-- All Messages  -->
+                        <div class="ui pink message margin-bottom" data-modal-target="message 1">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                <p>Today is "Aakash Panda's" Birthday!!!</p>
+                            </div>
+                        </div>
+                        <div class="ui olive message margin-bottom" data-modal-target="message 2">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                Complete Your Profile! To Display Info related to you...
+                            </div>
+                        </div>
+                        <div class="ui violet message margin-bottom" data-modal-target="message 3">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                <p>Motul has send you a Friends Request</p>
+                            </div>
+                        </div>
+
+                        <div class="suggesstions ui segment margin-top">
+                            <div class="heading">
+                                <h5 class="">Friends Suggestions</h5>
+                            </div>
+                            <div class="ui middle aligned divided list">
+                                {% for friend in profile.proposals_for_following %}
+                                    <div class="item">
+                                        <img class="ui avatar image" src="{{ friend.avatar.url }}">
+                                        <div class="content">
+                                            <a class="header" id="suggestion-name" href="{% url 'profiles:get_profile' friend.id %}">{{ friend.user.username }}</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Friends Online List  -->
+                        <div class="ui middle aligned animated list friends_online_list">
+                            <h4>Friends Online</h4>
+
+                            {% for following_user in profile.get_friends_list %}
+                                <div class="item">
+                                    <img class="ui avatar image" src="{{ following_user.avatar.url }}">
+                                    <div class="content" data-tooltip="{{ following_user.get_friends }} Friends ⏳ {% if following_user.is_online %} Online {% else %} {{ following_user.user.last_login|timesince }} ago {% endif %}" data-position="right center">
+                                        <div class="header">
+                                            <a href=""><span class="name">{{ following_user.user }} - Posts {{ following_user.num_posts }}</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block script_tag %}
+
+    <script src="{% static 'posts/js/main.js' %}"></script>
+    <script src="{% static 'posts/js/post_json.js' %}"></script>
+
+{% endblock script_tag %}
