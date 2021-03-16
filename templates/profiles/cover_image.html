@@ -1,0 +1,29 @@
+{% load static %}
+
+<!-- Cover Image Form  -->
+<div class="ui tiny modal" data-modal="longer Coverimage">
+    <i class="close icon"></i>
+    <div class="header">
+        Update Cover Image
+    </div>
+    <div class="scrolling content">
+        
+        <!-- Displaying Image and Alert Box  -->
+        
+        <div id="img-cover-box"></div>
+
+        <div id="alert-cover-box"></div>
+
+        <form action="#" class="ui form" id="p-cover-form">
+            {% csrf_token %}
+            {{ cover_image_form.as_p }}
+            
+            <div class="not-visible mt-2 mb-3" id="btn-cover-box">
+                <button type="submit" class="ui button primary mini mt-2">Update</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script src="{% static 'profiles/update_cover.js' %}"></script>

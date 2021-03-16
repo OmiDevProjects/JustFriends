@@ -8,4 +8,5 @@ urlpatterns = [
     path('friends/<str:profile_id>', views.get_profile, name='get_profile'),
 
     path('update_profile_view/', views.update_profile_image, name='update_avatar'),
+    path('update_coverImage/', views.update_cover_image, name='update_coverImage'),
 ]

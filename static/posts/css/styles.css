@@ -124,6 +124,11 @@
   color:rgb(119, 119, 119) !important;
 }
 
+.friendSuggest {
+  /* width: 20% !important; */
+  height: 20% !important;
+}
+
 /* Thought Card  */
 
 .card {
@@ -178,6 +183,10 @@
   color:rgb(119, 119, 119) !important;
 
 
+}
+
+.accordion{
+  width: 100% !important;
 }
 
 .mt-2 {

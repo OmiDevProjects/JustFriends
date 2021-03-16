@@ -9,7 +9,7 @@ from django.core.files.base import ContentFile
 
 from profiles.models import Profile
 
-ACTION_CHOICES= (
+ACTION_CHOICES = (
     ('NO_FILTER', 'no filter'),
     ('COLORIZED', 'colorized'),
     ('GRAYSCALE', 'grayscale'),
@@ -55,21 +55,41 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         
-        # open image
-        pil_img = Image.open(self.post_document)
+        if self.post_document:
+            # open image
+            pil_img = Image.open(self.post_document)
 
-        # convert the image to array and do some processing
-        cv_img = np.array(pil_img)
-        img = get_filtered_image(cv_img, self.action)
+            # convert the image to array and do some processing
+            cv_img = np.array(pil_img)
+            img = get_filtered_image(cv_img, self.action)
 
-        # convert back to pil image
-        im_pil = Image.fromarray(img)
+            # convert back to pil image
+            im_pil = Image.fromarray(img)
 
-        # save
-        buffer = BytesIO()
-        im_pil.save(buffer, format='png')
-        image_png = buffer.getvalue()
+            # save
+            buffer = BytesIO()
+            im_pil.save(buffer, format='png')
+            image_png = buffer.getvalue()
 
-        self.post_document.save(str(self.post_document), ContentFile(image_png), save=False)
+            self.post_document.save(str(self.post_document), ContentFile(image_png), save=False)
 
         super().save(*args, **kwargs)
+
+class Thought(models.Model):
+    thought = models.TextField(blank=True)
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=True)
+    liked = models.ManyToManyField(User, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.author)
+
+class All_Post(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True)
+    thoughts = models.ForeignKey(Thought, on_delete=models.CASCADE, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.pk)

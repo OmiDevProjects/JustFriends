@@ -29,7 +29,7 @@ body {
 
 /* Profile Description and header  */
 .description {
-  color: rgb(93, 1, 179) !important;
+  color: rgb(96, 94, 97) !important;
   font-weight: bold !important;
 }
 
@@ -87,4 +87,8 @@ body {
 
 .profile_margin_top {
   margin-top: 20px !important;
+}
+
+.mt-3 {
+  margin-top: 10px !important;
 }

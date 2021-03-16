@@ -36,6 +36,7 @@
                 <button type="submit" class="ui button inverted primary mini mt-2" data-filter="BLURRED">BLURRED</button>
                 <button type="submit" class="ui button inverted pink mini mt-2" data-filter="BINARY">BINARY</button>
                 <button type="submit" class="ui button violet mini mt-2" data-filter="INVERT">INVERT</button>
+                <!-- <button type="submit" class="ui button secondary mini mt-2">Remove Current Profile</button> -->
             </div>
 
         </form>
@@ -43,8 +44,34 @@
     </div>
 </div>
 
+<!-- Cover Image Form  -->
+<div class="ui tiny modal" data-modal="longer Coverimage">
+    <i class="close icon"></i>
+    <div class="header">
+        Update Cover Image
+    </div>
+    <div class="scrolling content">
+        
+        <!-- Displaying Image and Alert Box  -->
+        
+        <div id="img-cover-box"></div>
+
+        <div id="alert-cover-box"></div>
+
+        <form action="#" class="ui form" id="p-cover-form">
+            {% csrf_token %}
+            {{ cover_image_form.as_p }}
+            
+            <div class="not-visible mt-2 mb-3" id="btn-cover-box">
+                <button type="submit" class="ui button primary mini mt-2">Update</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
     <!-- Share Thoughts Modal  -->
-    <div class="ui longer modal " data-modal="longer posts">
+    <div class="ui longer modal " data-modal="longer profile">
         <i class="close icon"></i>
         <div class="header">
             Share your Content
@@ -100,11 +127,11 @@
                     </div>
                     <div class="content">
                         <div class="header header_1 align_center">{{ profile.user.username|capfirst }}</div>
-                        <div class="meta">
+                        <div class="meta mt-3">
                             <a>Profession : {{ profile.profession }}</a>
                         </div>
                         <div class="description">
-                            <p>“{{ profile.bio }}”</p>
+                            <p>“{{ profile.bio|safe }}”</p>
                         </div>
                     </div>
                     <div class="extra content">
@@ -118,9 +145,11 @@
                     </div>
                 </div>
 
-                
-                <button class="ui button orange" style="width: 100% !important;" data-modal-target="longer image">Update Profile</button>
-                
+                {% if profile.user == request.user %}
+                    <button class="ui small inverted button red mt-3" style="width: 100% !important;" data-modal-target="longer profile">Update Profile</button>
+                    <button class="ui small inverted button orange mt-3" style="width: 100% !important;" data-modal-target="longer image">Update Avatar</button>
+                    <button class="ui small inverted button brown mt-3" style="width: 100% !important;" data-modal-target="longer Coverimage">Update Cover Image</button>
+                {% endif %}
 
                 {% if profile.user == request.user %}
                     <div class="suggesstions ui segment margin-top" style="text-align: center;">
@@ -406,7 +435,7 @@
                                             <i class="right floated comments icon"></i>
                                         </a>
                                         <div class="header">
-                                            <a class="ui mini basic image label">
+                                            <a class="ui image label">
                                                 <img src="{{ post.author.avatar.url }}">
                                                 {{ post.author }}
                                             </a>

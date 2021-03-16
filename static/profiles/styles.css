@@ -4,6 +4,7 @@
 
 .profile_1{
     width: 100% !important;
+    margin-bottom: 20px !important;
     border-radius: 15px !important;
     background: #dde1e7 !important;
     box-shadow:  3px 3px 6px #bec2c7,
@@ -63,4 +64,8 @@
 
 .total_post p {
     color: rgb(66, 156, 230) !important;
+}
+
+.accordion{
+    width: 100% !important;
 }

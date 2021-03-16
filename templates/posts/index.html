@@ -57,12 +57,9 @@
                         Share Your Thoughts
                     </div>
                     <div class="active content">
-                        <form class="ui form">
-                            <div class="field">
-                                <label>Text</label>
-                                <textarea></textarea>
-                            </div>
-
+                        <form class="ui form" method="POST">
+                            {% csrf_token %}
+                            {{ post_thought_form.as_p }}
                             <button class="ui button small inverted green" type="submit">Share Your Thought</button>
                         </form>
                     </div>
@@ -71,10 +68,14 @@
                         Upload Video
                     </div>
                     <div class="content">
-                        <form action="#">
-                            <div class="ui input">
-                                <input type="file" />
-                            </div>
+                        <div id="video-box"></div>
+
+                        <div id="video-alert-box"></div>
+
+                        <form action="#" class="ui form" id="v-form">
+                            {% csrf_token %}
+                            {{ videoForm.as_p }}
+                            <button class="ui button small inverted blue" type="submit">Share Your Video</button>
                         </form>
                     </div>
                 </div>
@@ -98,11 +99,11 @@
                         </div>
                         <div class="content">
                             <div class="header header_1 align_center">{{ profile.user.username|capfirst }}</div>
-                            <div class="meta">
+                            <div class="meta mt-3">
                                 <a>Profession : {{ profile.profession }}</a>
                             </div>
                             <div class="description">
-                                <p>“{{ profile.bio }}”</p>
+                                <p>{{ profile.bio|safe }}</p>
                             </div>
                             <a class="ui blue right ribbon label" href="{% url 'profiles:profile_view' %}">Profile</a>
                         </div>
@@ -119,7 +120,7 @@
 
 
                     <!-- Activity Feed  -->
-                    <div class="ui relaxed list activity-box">
+                    <!-- <div class="ui relaxed list activity-box">
                         <h3>Activity Feeds</h3>
                         <div class="item">
                             <img class="ui avatar image" src="./images/wallpaperflare.com_wallpaper.jpg">
@@ -146,7 +147,7 @@
                                     yesterday.</div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
 
@@ -179,31 +180,31 @@
 
                     <!-- Image Post  -->
 
-                    {% for post in posts %}
-                        {% if post.post_document != 'post.png' %}
-                            <div class="ui segment segment-image post-image autumn leaf margin-top">
+                    {% for allpost in allposts %}
+                        {% if allpost.post %}
+                            <div class="ui segment segment-image post-image autumn leaf margin-top autumn leaf">
 
                                 <a class="ui yellow left corner label" onclick="startheart();">
                                     <i class="heart icon"></i>
                                 </a>
 
-                                {% if post.find_typecheck == 2 %}
-                                    <video src="{{ post.post_document.url }}" controls width="100%"></video>
+                                {% if allpost.post.find_typecheck == 2 %}
+                                    <video src="{{ allpost.post.post_document.url }}" controls width="100%"></video>
                                 {% else %}
-                                    <img class="ui image" src="{{ post.post_document.url }}" width="100%">
+                                    <img class="ui image" src="{{ allpost.post.post_document.url }}" width="100%">
                                 {% endif %}
 
                                 <div class="margin-top-post ui segment post-image-content">
                                     <a class="ui pink left shake ribbon label" data-modal-target="longer omi"><i
                                             class="heart icon"></i> 101 Likes</a>
                                     <p class="post-image-para">
-                                        {{ post.description }}
+                                        {{ allpost.post.description }}
                                     </p>
                                     <a class="ui green right ribbon label" data-modal-target="longer comment omi"><i
                                             class="comments icon"></i> 109 Comments</a>
                                 </div>
                                 
-                                {% if post.find_typecheck == 2 %}
+                                {% if allpost.post.find_typecheck == 2 %}
                                     <div class="ui mini top right attached label">Video Classified : Stranger Things</div>
                                 {% else %}
                                     <div class="ui mini top right attached label">Image Classified : Stranger Things</div>
@@ -211,8 +212,8 @@
 
                                 <div class="ui mini bottom left attached label">
                                     <a class="ui mini basic image label">
-                                        <img src="{{ post.author.avatar.url }}">
-                                        {{ post.author }} : <b class="time_created">{{ post.created|timesince }} ago</b>
+                                        <img src="{{ allpost.post.author.avatar.url }}">
+                                        {{ allpost.post.author }} : <b class="time_created">{{ allpost.post.created|timesince }} ago</b>
                                     </a>
                                 </div>
 
@@ -366,9 +367,7 @@
                                     </div>
                                 </div>
                             </div>
-                        {% endif %}
-
-                        {% if post.post_document == 'post.png' %}
+                        {% else %}
                             <!-- Thoughts or Quotes or Status Posts with no Image  -->
                             <div class="ui card thoughts autumn leaf margin-top">
                                 <div class="content">
@@ -379,14 +378,18 @@
                                         <i class="right floated comments icon"></i>
                                     </a>
                                     <div class="header">
-                                        <a class="ui mini basic image label">
+                                        <!-- <a class="ui mini basic image label">
                                             <img src="{{ post.author.avatar.url }}">
                                             {{ post.author }}
+                                        </a> -->
+                                        <a class="ui image label">
+                                            <img src="{{ allpost.thoughts.author.avatar.url }}">
+                                            {{ allpost.thoughts.author }}
                                         </a>
                                     </div>
                                     <div class="description description_thought">
                                         <p>
-                                            {{ post.description }}
+                                            {{ allpost.thoughts.thought }}
                                         </p>
                                     </div>
                                 </div>
@@ -397,7 +400,7 @@
                                     </span>
                                     <span class="right floated">
                                         <i class="clock outline icon"></i>
-                                        {{ post.created|timesince }} ago
+                                        {{ allpost.thoughts.created|timesince }} ago
                                     </span>
                                 </div>
 
@@ -543,7 +546,7 @@
                             <div class="ui middle aligned divided list">
                                 {% for friend in profile.proposals_for_following %}
                                     <div class="item">
-                                        <img class="ui avatar image" src="{{ friend.avatar.url }}">
+                                        <img class="ui avatar image " src="{{ friend.avatar.url }}">
                                         <div class="content">
                                             <a class="header" id="suggestion-name" href="{% url 'profiles:get_profile' friend.id %}">{{ friend.user.username }}</a>
                                         </div>

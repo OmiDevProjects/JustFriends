@@ -1,8 +1,24 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from posts.utils import get_filtered_image
+
+from PIL import Image
+import numpy as np
+from io import BytesIO
+from django.core.files.base import ContentFile
+
 from itertools import chain
 import random
+
+ACTION_CHOICES= (
+    ('NO_FILTER', 'no filter'),
+    ('COLORIZED', 'colorized'),
+    ('GRAYSCALE', 'grayscale'),
+    ('BLURRED', 'blurred'),
+    ('BINARY', 'binary'),
+    ('INVERT', 'invert'),
+)
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True)
@@ -11,7 +27,9 @@ class Profile(models.Model):
     following = models.ManyToManyField(User, related_name='following', blank=True)
     bio = models.TextField(blank=True, default='No Bio')
     profession = models.CharField(blank=True, default='Student', max_length=255)
-    is_online = models.BooleanField(default=False)
+    dob_date = models.DateField(blank=True, null=True)
+    action = models.CharField(max_length=50, choices=ACTION_CHOICES, null=True)
+    # is_online = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -98,3 +116,24 @@ class Profile(models.Model):
             friends_list.append(profile)
 
         return friends_list
+
+    def save(self, *args, **kwargs):
+        
+        # open image
+        pil_img = Image.open(self.avatar)
+
+        # convert the image to array and do some processing
+        cv_img = np.array(pil_img)
+        img = get_filtered_image(cv_img, self.action)
+
+        # convert back to pil image
+        im_pil = Image.fromarray(img)
+
+        # save
+        buffer = BytesIO()
+        im_pil.save(buffer, format='png')
+        image_png = buffer.getvalue()
+
+        self.avatar.save(str(self.avatar), ContentFile(image_png), save=False)
+
+        super().save(*args, **kwargs)

@@ -14,6 +14,41 @@ $(document).ready(function () {
     $('.ui.accordion')
         .accordion();
 
+    $('.profile_1')
+        .transition('pulse')
+      ;
+      
+    $('.add-posts')
+      .transition('pulse')
+    ;
+
+    $('.suggesstions')
+      .transition('tada')
+    ;
+
+    $('.friends_online_list')
+      .transition('tada')
+    ;
+
+    $('.post-image')
+    .transition('flash')
+    ;
+
+    $('.following')
+        .transition('tada')
+        ;
+
+    $('.followers')
+    .transition('tada')
+    ;
+
+    $('.friends')
+    .transition('tada')
+    ;
+
+    $('.total_post')
+    .transition('tada')
+    ;
     // $('.message')
     //     .transition('fly right', {
     //         duration: '20s',
@@ -39,14 +74,14 @@ const startit = () => {
     setTimeout(function () {
         console.log("start");
         confetti.start();
-    }, 1000);
+    }, 500);
 };
 
 const stopit = () => {
     setTimeout(function () {
         console.log("stop");
         confetti.stop();
-    }, 5000);
+    }, 1200);
 };
 
 startit();
@@ -64,9 +99,12 @@ function startheart() {
         setTimeout(function () {
             console.log("stop");
             confetti.stop();
-        }, 1000);
+        }, 500);
     };
 
+    const id = document.getElementById('post');
+
+    $('.autumn.leaf').transition('tada');
     startit();
     stopit();
 }
