@@ -66,10 +66,6 @@ scipy==1.4.1
 six==1.15.0
 soupsieve==2.1
 sqlparse==0.4.1
-tensorboard==1.15.0
-tensorboard-plugin-wit==1.7.0
-tensorflow==1.15.0
-tensorflow-estimator==1.15.1
 termcolor==1.1.0
 typing-extensions==3.7.4.3
 uritemplate==3.0.1
