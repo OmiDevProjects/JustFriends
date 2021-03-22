@@ -1,0 +1,94 @@
+body {
+  min-height: 2000px;
+  padding-top: 54px;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: grayscale;
+  /* background: #ebebeb; */
+  background: #dde1e7;
+}
+
+.ui.borderless.menu {
+  background: #dde1e7 !important;
+  box-shadow: 5px 5px 9px #c5c8ce, -5px -5px 9px #f5faff !important;
+  box-shadow: none;
+  flex-wrap: wrap;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.header_title {
+  font-family: "Rancho", cursive;
+  color: rgb(160, 0, 88) !important;
+}
+
+/* Menu  */
+.menu {
+  font-size: 13px !important;
+}
+
+/* Profile Description and header  */
+.description {
+  color: rgb(96, 94, 97) !important;
+  font-weight: bold !important;
+}
+
+.header_1 {
+  color: rgb(122, 122, 122) !important;
+}
+
+/* Profile end  */
+
+.ui.borderless.menu .header.item {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.ui.mobile.only.grid .ui.menu .ui.vertical.menu {
+  display: none;
+}
+
+.ui.mobile.only.grid .ui.vertical.menu .dropdown.icon {
+  float: unset;
+}
+
+.ui.mobile.only.grid .ui.vertical.menu .dropdown.icon:before {
+  content: "\f0d7";
+}
+
+.ui.mobile.only.grid .ui.vertical.menu .ui.dropdown.item .menu {
+  position: static;
+  width: 100%;
+  background-color: unset;
+  border: none;
+  box-shadow: none;
+}
+
+.ui.mobile.only.grid .ui.vertical.menu .ui.dropdown.item .menu {
+  margin-top: 6px;
+}
+
+.ui.container > .ui.message {
+  background-color: rga(238, 238, 238);
+  box-shadow: none;
+  padding: 5rem 4rem;
+  margin-top: 1rem;
+}
+
+/* main Grid  */
+.grid-margin-top {
+  margin-top: 5px !important;
+}
+
+
+.align_center {
+  text-align: center;
+}
+
+.profile_margin_top {
+  margin-top: 20px !important;
+}
+
+.mt-3 {
+  margin-top: 10px !important;
+}

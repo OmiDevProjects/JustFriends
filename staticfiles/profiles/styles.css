@@ -1,0 +1,71 @@
+.card {
+    width: 100% !important;
+}
+
+.profile_1{
+    width: 100% !important;
+    margin-bottom: 20px !important;
+    border-radius: 15px !important;
+    background: #dde1e7 !important;
+    box-shadow:  3px 3px 6px #bec2c7,
+                 -3px -3px 6px #fcffff !important;
+}
+
+.profile_grid_container {
+    margin-top: 20px !important;
+}
+
+.image_background {
+    height: 200px !important;
+    width: 100% !important;
+    margin-top: 20px !important;
+}
+
+.segment_profile_info {
+    border: none !important;
+    border-radius: 10px !important;
+    background: #dde1e7 !important;
+    box-shadow: inset 3px 3px 6px #b7bbc0,
+                inset -3px -3px 6px #ffffff !important;
+}
+
+.all_posts h3 {
+    color: rgb(116, 116, 116) !important;
+    text-align: center;
+}
+
+.following {
+    background: rgb(15, 15, 15) !important;
+}
+
+.following p {
+    color: rgb(73, 231, 205) !important;
+}
+
+.followers {
+    background: rgb(15, 15, 15) !important;
+}
+
+.followers p {
+    color: rgb(235, 64, 115) !important;
+}
+
+.friends {
+    background: rgb(15, 15, 15)!important;
+}
+
+.friends p {
+    color: rgb(17, 204, 0) !important;
+}
+
+.total_post {
+    background: rgb(15, 15, 15) !important;
+}
+
+.total_post p {
+    color: rgb(66, 156, 230) !important;
+}
+
+.accordion{
+    width: 100% !important;
+}
