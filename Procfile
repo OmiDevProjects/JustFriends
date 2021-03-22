@@ -1,1 +1,1 @@
-web : gunicorn JustFriends.wsgi
+web: gunicorn JustFriends.wsgi
