@@ -8,6 +8,23 @@ import numpy as np
 from io import BytesIO
 from django.core.files.base import ContentFile
 
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+
+class UserRegisterForm(UserCreationForm):
+    username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'placeholder': 'Username'}))
+    email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
+    password1 = forms.CharField(label='Password ( Strong Password )', widget=forms.PasswordInput(attrs={'placeholder': 'Password ( Strong Password )'}))
+    password2 = forms.CharField(label='Confirm Password',  widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}))
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+
+class userLoginForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Your Verifed Username'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Your Password'}))
+
 class UpdateProfileImage(forms.ModelForm):
     class Meta:
         model = Profile
@@ -38,3 +55,4 @@ class UpdateCoverImage(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['background']
+

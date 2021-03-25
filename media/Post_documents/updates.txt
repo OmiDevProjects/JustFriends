@@ -1,0 +1,25 @@
+course image link --> 
+terms and condition
+login redirect
+homepage Update  -->
+category image -->
+instructor link -->
+
+
+SuccessFirst:
+	Want logo big
+	remove company name
+	about us
+	shop > teacher
+	contact
+	courses
+	login / Register
+
+
+	- Homepage Image ( change )
+	- Pages > Services
+		- Services
+	- remove price, instructor
+	- IB Board - another board
+	- hide video Div
+	-

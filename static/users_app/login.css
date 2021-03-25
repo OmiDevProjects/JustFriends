@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    background: #dde1e7;
+}
+
+.content_ {
+    border-radius: 6px;
+    width: 330px;
+    background: #dde1e7;
+    padding: 40px 30px;
+    box-shadow: -3px -3px 7px #ffffff73, 
+                2px 2px 5px rgba(94, 104, 121, 0.288);
+}
+
+.content_ .text {
+    color: gray !important;
+    font-size: 25px !important;
+    font-family: 'Rancho', cursive;
+    text-align: center;
+}
+
+.margin-top {
+    margin-top: 20px !important;
+}
+
+label {
+    color: gray !important;
+    font-family: 'Baumans', cursive;
+    font-size: 15px;
+}
+
+.forget-password {
+    color: rgb(197, 0, 92) !important;
+}
+
+.create_account {
+    color: rgb(101, 0, 184) !important;
+    text-decoration: none !important;
+}
+
+hr {
+    margin-bottom: 10px !important;
+}
+
+.create_account label a {
+    text-decoration: none !important;
+}
+
+input {
+    border: none !important;
+    border-radius: 10px !important;
+    background: #dde1e7 !important;
+    box-shadow: inset 4px 4px 4px #c5c8ce,
+                inset -3px -3px 3px #f5faff !important;
+}
+
+.grey {
+    color: grey !important;
+    background: #dde1e7 !important;
+    box-shadow:  2px 2px 3px #c5c8ce,
+                 -2px -2px 4px #f5faff !important;
+}
+
+button:hover {
+    background: #dde1e7 !important;
+    box-shadow: inset 2px 2px 4px #c5c8ce,
+            inset -3px -3px 4px #f5faff !important;
+}

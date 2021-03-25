@@ -119,21 +119,23 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
         
-        # open image
-        pil_img = Image.open(self.avatar)
+        if self.avatar != 'avatar.png':
+            print('Avatar Image : ', self.avatar)
+            # open image
+            pil_img = Image.open(self.avatar)
 
-        # convert the image to array and do some processing
-        cv_img = np.array(pil_img)
-        img = get_filtered_image(cv_img, self.action)
+            # convert the image to array and do some processing
+            cv_img = np.array(pil_img)
+            img = get_filtered_image(cv_img, self.action)
 
-        # convert back to pil image
-        im_pil = Image.fromarray(img)
+            # convert back to pil image
+            im_pil = Image.fromarray(img)
 
-        # save
-        buffer = BytesIO()
-        im_pil.save(buffer, format='png')
-        image_png = buffer.getvalue()
+            # save
+            buffer = BytesIO()
+            im_pil.save(buffer, format='png')
+            image_png = buffer.getvalue()
 
-        self.avatar.save(str(self.avatar), ContentFile(image_png), save=False)
+            self.avatar.save(str(self.avatar), ContentFile(image_png), save=False)
 
         super().save(*args, **kwargs)

@@ -34,6 +34,16 @@
                 <a class="item">Search Friends</a>
                 <a class="item">My Posts</a>
                 <!-- <a class="item"> -->
+                    
+                <!-- </a> -->
+                <div class="right menu">
+                    {% if request.user.is_authenticated %}
+                        <a class="item">Welcome!</a>
+                    {% else %}
+                        <a href="{% url 'profiles:user_login' %}" class="item">Login</a>
+                        <a href="{% url 'profiles:user_register' %}" class="item">Sign up</a>
+                    {% endif %}
+
                     <div class="ui item floating dropdown icon button medium"> {{ request.user }}  &nbsp; &nbsp; <i class="dropdown icon"></i>
                         <div class="menu">
                             <a href="{% url 'profiles:profile_view' %}" class="item">
@@ -52,12 +62,11 @@
                             <a href="" class=" item">
                                 Received Invites &nbsp; <div class="ui purple horizontal label">{{ invites_num }}</div>
                             </a>
+                            <a href="{% url 'profiles:user_login' %}" class="item">
+                                Logout
+                            </a>
                         </div>
                     </div>
-                <!-- </a> -->
-                <div class="right menu">
-                    <a class="item">Login</a>
-                    <a class="item">Sign up</a>
                 </div>
             </div>
         </div>
@@ -96,8 +105,12 @@
                         </a>
                     </div>
                 </div>
-                <a class="item">Login</a>
-                <a class="item">Sign up</a>
+                {% if request.user.is_authenticated %}
+                    <a href="profiles:user_logout" class="item">Logout</a>
+                {% else %}
+                    <a href="{% url 'profiles:user_login' %}" class="item">Login</a>
+                    <a href="{% url 'profiles:user_register' %}" class="item">Sign up</a>
+                {% endif %}
             </div>
         </div>
     </div>

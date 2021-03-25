@@ -9,4 +9,9 @@ urlpatterns = [
 
     path('update_profile_view/', views.update_profile_image, name='update_avatar'),
     path('update_coverImage/', views.update_cover_image, name='update_coverImage'),
+
+    # User Authentication
+    path('register/', views.user_register_form, name='user_register'),
+    path('login/', views.user_login_form, name='user_login'),
+    path('logout/', views.user_logout, name='user_logout'),
 ]

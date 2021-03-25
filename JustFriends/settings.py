@@ -26,7 +26,7 @@ SECRET_KEY = '_lh6b@z(qtv8g0+%bf@m-79b9tiif!35vzt^&qv3incq5u2q-e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['just-friends-app.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -131,3 +131,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # django_heroku.settings(locals())
+
+LOGIN_URL = 'profiles:user_login'

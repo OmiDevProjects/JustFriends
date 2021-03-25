@@ -5,11 +5,14 @@ from django.http import JsonResponse
 from django.core import serializers
 import json
 
+from django.contrib.auth.decorators import login_required
+
 from .models import Post, Thought, All_Post
 from profiles.models import Profile
 from .forms import PostForm, PostThought, VideoPostForm
 
 # Homepage View Function
+@login_required
 def index(request):
 
     # Profile Info [ Logged in User ]
