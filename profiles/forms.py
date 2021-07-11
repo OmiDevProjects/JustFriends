@@ -56,3 +56,7 @@ class UpdateCoverImage(forms.ModelForm):
         model = Profile
         fields = ['background']
 
+class UpdateProfileInfo(forms.Form):
+    bio = forms.CharField(widget=forms.Textarea())
+    # dob = forms.DateField(input_formats='%Y-%m-%d')
+    profession = forms.CharField(max_length=255)

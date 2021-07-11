@@ -7,6 +7,27 @@ const image = document.getElementById('id_avatar');
 const btnBox = document.getElementById('btn-box');
 const btns = [...btnBox.children]
 
+// *************************  Update Profile Info variables *************************
+
+const alertProfileBox = document.getElementById('alert-profile-box');
+const profileForm = document.getElementById('profile-form');
+const csrf_token_profile = document.getElementsByName('csrfmiddlewaretoken');
+
+const bio_ = document.getElementById('id_bio');
+// const dob_ = document.getElementById('id_dob');
+const profession_ = document.getElementById('id_profession');
+
+const url_profile = '/profile/update_profile_info/';
+
+// Handling Alert Boxes 
+const handleAlerts_profile = (type, text) => {
+    alertProfileBox.innerHTML = `
+    <div class="ui ${type} message mt-2">${text}</div>
+    `
+}
+
+// ************************* End of Profile info ******************** 
+
 // Background Cover Image Changes Variable
 const alertCoverBox = document.getElementById('alert-cover-box');
 const imgCoverBox = document.getElementById('img-cover-box');
@@ -34,7 +55,7 @@ imageCover.addEventListener('change', () => {
 
 })
 
-// *************************************
+// ************************************* End of Background  Cover ###############
 
 var mediaURL = window.location.href + 'media/'
 
@@ -124,6 +145,33 @@ formCover.addEventListener('submit', (e) => {
         },
         error: function (error) {
             handleAlerts_cover('danger', 'OOOPS, Got Something Wrong...');
+        },
+        cache: false,
+        contentType: false,
+        processData: false,
+    })
+})
+
+profileForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const form_date_profile = new FormData();
+    form_date_profile.append('csrfmiddlewaretoken', csrf_token_profile[0].value);
+    form_date_profile.append('bio', bio_.value);
+    // form_date_profile.append('dob', dob_);
+    form_date_profile.append('profession', profession_.value);
+
+    $.ajax({
+        type: 'POST',
+        url: url_profile,
+        data: form_date_profile,
+        success: function (response) {
+            console.log(response);
+            handleAlerts_profile('success', 'Your Profie info is Updated!!!');
+        },
+        error: function (error) {
+            console.log(error);
+            handleAlerts_profile('danger', 'OOOPS, Got Something Wrong...');
         },
         cache: false,
         contentType: false,

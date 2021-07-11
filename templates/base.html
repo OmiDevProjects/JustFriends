@@ -62,7 +62,7 @@
                             <a href="" class=" item">
                                 Received Invites &nbsp; <div class="ui purple horizontal label">{{ invites_num }}</div>
                             </a>
-                            <a href="{% url 'profiles:user_login' %}" class="item">
+                            <a href="{% url 'profiles:user_logout' %}" class="item">
                                 Logout
                             </a>
                         </div>
@@ -106,7 +106,7 @@
                     </div>
                 </div>
                 {% if request.user.is_authenticated %}
-                    <a href="profiles:user_logout" class="item">Logout</a>
+                    <a href="{% url 'profiles:user_logout' %}" class="item">Logout</a>
                 {% else %}
                     <a href="{% url 'profiles:user_login' %}" class="item">Login</a>
                     <a href="{% url 'profiles:user_register' %}" class="item">Sign up</a>

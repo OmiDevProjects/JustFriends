@@ -17,39 +17,30 @@
         type="text/css" />
 
     <link rel="stylesheet" href="{% static 'users_app/login.css' %}">
-    <title>Login - JustFriends</title>
+    <title>OTP Verification - JustFriends</title>
 </head>
 
 <body>
 
     <div class="content_">
         <div class="text">
-            Login - JustFriends
+            OTP Verification - JustFriends
         </div>
 
         <form class="ui form margin-top" autocomplete="off" method="POST">
             {% csrf_token %}
-            {% for field in form %}
-                <div class="field">
-                    {{ field.label_tag }}
-                    {{ field }}
-                </div>
-            {% endfor %}
             <div class="field">
-                <label><a href="#" class="forget-password">Forget Password</a></label>
+                <label>Enter OTP</label>
+                <input type="text" name="otp" placeholder="OTP">
             </div>
             <button class="ui animated fade grey button" type="submit">
-                <span class="visible content">Login</span>
+                <span class="visible content">Submit</span>
                 <span class="hidden content"><i class="sign-in icon"></i></span>
             </button>
-            <div class="field margin-top">
-                <hr>
-                <label>Need An Account? <a href="{% url 'profiles:user_register' %}" class="create_account">Signup Here</a></label>
-            </div>
         </form>
         {% if messages %}
             {% for message in messages %}
-                {% if message.tags == 'success' %}
+                {% if message.tags == 'sucess' %}
                     <div class="ui green message medium">{{ message }}</div>
                 {% endif %}
 

@@ -139,3 +139,11 @@ class Profile(models.Model):
             self.avatar.save(str(self.avatar), ContentFile(image_png), save=False)
 
         super().save(*args, **kwargs)
+
+class User_OTP(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    timeStamp = models.DateTimeField(auto_now_add=True)
+    otp = models.SmallIntegerField()
+
+    def __str__(self):
+        return str(self.user)
